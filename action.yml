@@ -1,0 +1,15 @@
+name: 'WordPress SVN tag cleaner'
+author: 'Erika Gili'
+description: 'Remove tags from your WordPress plugin SVN repository'
+inputs:
+  tag-to-remove:
+    description: 'Tag to remove'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.tag-to-remove }}
+branding:
+  icon: folder-minus
+  color: red
