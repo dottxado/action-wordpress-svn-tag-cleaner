@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Remove the tag
     steps:
-      - uses: dottxado/action-wordpress-svn-tag-cleaner@v1.0.0
+      - uses: dottxado/action-wordpress-svn-tag-cleaner@1.0.0
         with:
           tag-to-remove: ${{ github.event.inputs.tag-to-remove }}
 ```
