@@ -36,4 +36,7 @@ jobs:
       - uses: dottxado/action-wordpress-svn-tag-cleaner@1.0.0
         with:
           tag-to-remove: ${{ github.event.inputs.tag-to-remove }}
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
 ```
