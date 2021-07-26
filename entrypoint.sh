@@ -20,16 +20,16 @@ echo "ℹ︎ SLUG is $SLUG"
 SVN_URL="https://plugins.svn.wordpress.org/${SLUG}/"
 SVN_DIR="/github/svn-${SLUG}"
 
-svn list "$SVN_URL" << EOF
-p
-EOF
-if [ $? -ne 0 ]; then
-  echo "ℹ︎ Error on SVN list, exiting"
-  exit 1
-fi
+#svn list "$SVN_URL" << EOF
+#p
+#EOF
+#if [ $? -ne 0 ]; then
+#  echo "ℹ︎ Error on SVN list, exiting"
+#  exit 1
+#fi
 
 echo "➤ Checking out .org repository..."
-svn checkout --depth immediates "$SVN_URL" "$SVN_DIR"
+svn checkout --depth immediates "$SVN_URL" "$SVN_DIR" --trust-server-cert
 if [ $? -ne 0 ]; then
   echo "ℹ︎ Error on SVN checkout, exiting"
   exit 1
