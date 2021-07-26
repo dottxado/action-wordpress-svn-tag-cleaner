@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TAG = $1
+TAG=$1
 
 if [[ -z "$SVN_USERNAME" ]]; then
 	echo "Set the SVN_USERNAME secret"
