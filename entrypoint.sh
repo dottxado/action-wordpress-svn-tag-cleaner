@@ -20,14 +20,6 @@ echo "ℹ︎ SLUG is $SLUG"
 SVN_URL="https://plugins.svn.wordpress.org/${SLUG}/"
 SVN_DIR="/github/svn-${SLUG}"
 
-#svn list "$SVN_URL" << EOF
-#p
-#EOF
-#if [ $? -ne 0 ]; then
-#  echo "ℹ︎ Error on SVN list, exiting"
-#  exit 1
-#fi
-
 echo "➤ Checking out .org repository..."
 svn checkout --depth immediates "$SVN_URL" "$SVN_DIR" --trust-server-cert
 if [ $? -ne 0 ]; then
@@ -35,7 +27,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 cd "$SVN_DIR"
-svn update --set-depth infinity tags
+svn update --set-depth infinity tags --trust-server-cert
 
 echo "➤ Removing tag $TAG"
 cd "${SVN_DIR}/tags"
@@ -45,6 +37,9 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-svn commit -m "Removed tag" --no-auth-cache --non-interactive --username "$SVN_USERNAME" --password "$SVN_PASSWORD"
-
+svn commit -m "Removed tag" --no-auth-cache --non-interactive --username "$SVN_USERNAME" --password "$SVN_PASSWORD" --trust-server-cert
+if [ $? -ne 0 ]; then
+  echo "ℹ︎ Cannot remove the tag."
+  exit 1
+fi
 echo "✓ Tag removed!"
